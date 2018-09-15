@@ -64,6 +64,7 @@ var resizefunc = [];
                 e.stopPropagation();
                 console.log('openLeftBar//////');
                 $this.openLeftBar();
+                $(".admin-title").toggle();
             });
 
             // LEFT SIDE MAIN NAVIGATION

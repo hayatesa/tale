@@ -64,7 +64,6 @@ var vm = new Vue({
                 params.selected = null;
                 params.created = moment($('#form_datetime').val(), "YYYY-MM-DD HH:mm").unix();
                 params.tags = $('#tags').val();
-
                 var url = $vm.article.cid !== '' ? '/admin/api/article/update' : '/admin/api/article/new';
                 tale.post({
                     url: url,
@@ -179,7 +178,8 @@ $(document).ready(function () {
                     success: function (result) {
                         tale.hideLoading();
                         if (result && result.success) {
-                            var url = $('#attach_url').val() + result.payload[0].fkey;
+                            // var url = $('#attach_url').val() + result.payload[0].fkey;
+                            var url = result.payload[0].fkey;
                             console.log('url =>' + url);
                             htmlEditor.summernote('insertImage', url);
                         } else {
@@ -276,9 +276,10 @@ $(document).ready(function () {
         init: function () {
             this.on('success', function (files, result) {
                 console.log("upload success..");
-                console.log(" result => " + result);
+                console.log(" result => " + result.payload[0].fkey);
                 if (result && result.success) {
-                    var url = attach_url + result.payload[0].fkey;
+                    // var url = attach_url + result.payload[0].fkey;
+                    var url = result.payload[0].fkey;
                     console.log('url => ' + url);
 
                     vm.article.thumbImg = url;

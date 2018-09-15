@@ -66,7 +66,8 @@ var vm = new Vue({
                         success: function (result) {
                             tale.hideLoading();
                             if (result && result.success) {
-                                var url = $('#attach_url').val() + result.payload[0].fkey;
+                                // var url = $('#attach_url').val() + result.payload[0].fkey;
+                                var url = result.payload[0].fkey;
                                 console.log('url =>' + url);
                                 htmlEditor.summernote('insertImage', url);
                             } else {
@@ -154,11 +155,12 @@ var vm = new Vue({
                                 off: '取消'
                             }
                         });
+                        var imgPath = $('#attach_url').val() + $vm.article.thumbImg;
 
                         $('#dropzone-container').removeClass('hide');
                         $('#dropzone-container').show();
                         $('.dz-image').hide();
-                        $('#dropzone').css('background-image', 'url(' + $vm.article.thumbImg + ')');
+                        $('#dropzone').css('background-image', 'url(' + imgPath + ')');
                         $('#dropzone').css('background-size', 'cover');
                     } else {
                         $('#addThumb').toggles({
@@ -356,7 +358,8 @@ $(document).ready(function () {
                 console.log("upload success..");
                 console.log(" result => " + result);
                 if (result && result.success) {
-                    var url = attach_url + result.payload[0].fkey;
+                    // var url = attach_url + result.payload[0].fkey;
+                    var url = result.payload[0].fkey;
                     console.log('url => ' + url);
 
                     vm.article.thumbImg = url;
