@@ -116,7 +116,9 @@
                 type: 'post',
                 title:'',
                 status: '',
-                categories: ''
+                categories: '',
+                page: 0,
+                limit: 12
             },
             categories:[]
         },
@@ -141,8 +143,9 @@
                     }
                 });
             },
-            load: function () {
+            load: function (page) {
                 var $vm = this;
+                $vm.search.page = page;
                 tale.get({
                     url: '/admin/api/articles',
                     data: $vm.search,

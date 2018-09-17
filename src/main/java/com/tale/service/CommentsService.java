@@ -4,8 +4,6 @@ import com.blade.exception.ValidatorException;
 import com.blade.ioc.annotation.Bean;
 import com.blade.kit.BladeKit;
 import com.blade.kit.DateKit;
-import com.tale.bootstrap.TaleConst;
-import com.tale.extension.Commons;
 import com.tale.model.dto.Comment;
 import com.tale.model.entity.Comments;
 import com.tale.model.entity.Contents;
@@ -19,7 +17,7 @@ import io.github.biezhi.anima.page.Page;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.tale.bootstrap.TaleConst.*;
+import static com.tale.bootstrap.TaleConst.COMMENT_APPROVED;
 import static io.github.biezhi.anima.Anima.select;
 import static io.github.biezhi.anima.Anima.update;
 

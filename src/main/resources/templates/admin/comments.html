@@ -100,10 +100,14 @@
             this.load();
         },
         methods: {
-            load: function () {
+            load: function (page) {
                 var $vm = this;
                 tale.get({
                     url: '/admin/api/comments',
+                    data: {
+                      page: page,
+                      limit: 12
+                    },
                     success: function (data) {
                         $vm.commentPage = data.payload
                     },

@@ -80,7 +80,7 @@ public final class Theme {
         if (null != value) {
             p = value.toString() + " - ";
         }
-        return p + Commons.site_option("site_title", "Tale 博客");
+        return p + Commons.site_option("site_title", " Blog");
     }
 
     /**
@@ -328,7 +328,6 @@ public final class Theme {
             return "";
         }
         if (StringKit.isNotBlank(contents.getThumbImg())) {
-            String newFileName       = TaleUtils.getFileName(contents.getThumbImg());
             return contents.getThumbImg();
         }
         String content = article(contents.getContent());

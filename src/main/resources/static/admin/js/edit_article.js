@@ -66,7 +66,6 @@ var vm = new Vue({
                         success: function (result) {
                             tale.hideLoading();
                             if (result && result.success) {
-                                // var url = $('#attach_url').val() + result.payload[0].fkey;
                                 var url = result.payload[0].fkey;
                                 console.log('url =>' + url);
                                 htmlEditor.summernote('insertImage', url);
@@ -99,11 +98,12 @@ var vm = new Vue({
                     alert(error || '数据加载失败');
                 }
             });
+
             tale.get({
                 url: '/admin/api/articles/' + cid,
                 success: function (data) {
                     $vm.article = data.payload;
-                    $vm.article.tags = data.payload.tags;
+                    $vm.article.tags = data.payload.tags || "";
                     $vm.article.selected = [];
 
                     var selected = data.payload.categories.split(',');
@@ -111,11 +111,6 @@ var vm = new Vue({
                         $vm.article.selected.push(selected[item]);
                     }
 
-                    if ($vm.article.fmtType === 'markdown') {
-                        mditor.value = data.payload.content;
-                    } else {
-                        htmlEditor.summernote("code", data.payload.content);
-                    }
                     $vm.article.createdTime = moment.unix($vm.article.created).format('YYYY-MM-DD HH:mm')
 
                     var tags = data.payload.tags.split(',');
@@ -155,12 +150,11 @@ var vm = new Vue({
                                 off: '取消'
                             }
                         });
-                        var imgPath = $('#attach_url').val() + $vm.article.thumbImg;
 
                         $('#dropzone-container').removeClass('hide');
                         $('#dropzone-container').show();
                         $('.dz-image').hide();
-                        $('#dropzone').css('background-image', 'url(' + imgPath + ')');
+                        $('#dropzone').css('background-image', 'url(' + $vm.article.thumbImg + ')');
                         $('#dropzone').css('background-size', 'cover');
                     } else {
                         $('#addThumb').toggles({
@@ -178,6 +172,18 @@ var vm = new Vue({
                     alert(error || '数据加载失败');
                 }
             });
+
+            tale.get({
+                url: '/admin/api/articles/content/' + cid,
+                success: function (data) {
+                    if ($vm.article.fmtType === 'markdown') {
+                        mditor.value = data;
+                    } else {
+                        htmlEditor.summernote("code", data);
+                    }
+                }
+            });
+
         },
         autoSave: function (callback) {
             var $vm = this;
@@ -358,7 +364,6 @@ $(document).ready(function () {
                 console.log("upload success..");
                 console.log(" result => " + result);
                 if (result && result.success) {
-                    // var url = attach_url + result.payload[0].fkey;
                     var url = result.payload[0].fkey;
                     console.log('url => ' + url);
 

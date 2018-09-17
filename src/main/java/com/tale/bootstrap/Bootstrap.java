@@ -2,7 +2,6 @@ package com.tale.bootstrap;
 
 import com.blade.Blade;
 import com.blade.Environment;
-import com.blade.event.BeanProcessor;
 import com.blade.ioc.Ioc;
 import com.blade.ioc.annotation.Bean;
 import com.blade.ioc.annotation.Inject;

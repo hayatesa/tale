@@ -1,7 +1,10 @@
 package com.tale.utils;
 
-import java.awt.Image;
-import java.awt.Rectangle;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReadParam;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -11,12 +14,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
-
 public class ImageUtils {
+
+    /**
+     * 判断是否为jpg或jpeg格式的图片
+     * @param src 带后缀的文件名
+     * @return jpg或jpeg格式返回true
+     */
+    public static boolean isJpegOrJpg(String src) {
+        String suffix = src.substring(src.lastIndexOf(".") + 1);
+        if (null == suffix || !("jpg".equalsIgnoreCase(suffix) || "jpeg".equalsIgnoreCase(suffix))) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * 根据尺寸图片居中裁剪
@@ -28,6 +39,9 @@ public class ImageUtils {
      * @throws IOException
      */
     public static void cutCenterImage(String src, String dest, int w, int h) throws IOException {
+        if (!isJpegOrJpg(src)) {
+            return;
+        }
         Iterator         iterator = ImageIO.getImageReadersByFormatName("jpg");
         ImageReader      reader   = (ImageReader) iterator.next();
         InputStream      in       = new FileInputStream(src);
@@ -52,6 +66,9 @@ public class ImageUtils {
      * @throws IOException
      */
     public static void cutHalfImage(String src, String dest) throws IOException {
+        if (!isJpegOrJpg(src)) {
+            return;
+        }
         Iterator         iterator = ImageIO.getImageReadersByFormatName("jpg");
         ImageReader      reader   = (ImageReader) iterator.next();
         InputStream      in       = new FileInputStream(src);
@@ -80,6 +97,9 @@ public class ImageUtils {
      * @throws IOException
      */
     public static void cutImage(String src, String dest, int x, int y, int w, int h) throws IOException {
+        if (!isJpegOrJpg(src)) {
+            return;
+        }
         Iterator         iterator = ImageIO.getImageReadersByFormatName("jpg");
         ImageReader      reader   = (ImageReader) iterator.next();
         InputStream      in       = new FileInputStream(src);

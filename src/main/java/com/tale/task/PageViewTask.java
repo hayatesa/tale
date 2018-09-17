@@ -1,13 +1,6 @@
 package com.tale.task;
 
 import com.blade.ioc.annotation.Bean;
-import com.blade.task.annotation.Schedule;
-import io.github.biezhi.anima.Anima;
-
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * 定时刷新 PV 到数据库

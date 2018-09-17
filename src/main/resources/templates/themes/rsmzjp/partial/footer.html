@@ -13,8 +13,8 @@
                     </a>
                     <div class="info-text">
                         <p></p>
-                        <p>Less is more</p>
-                        <p>&copy; <a href="https://github.com/biezhi">溶酶菌</a></p>
+                        <p>Less Is More</p>
+                        <p>&copy; <a href="https://github.com/hayatesa" target="_blank">溶酶菌</a></p>
                     </div>
                 </div>
             </div>
@@ -137,9 +137,10 @@
 </script>
 #end
 <script src="${theme_url('/static/js/headroom.min.js')}"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
 <script src="${theme_url('/static/js/instantclick.min.js')}"></script>
-<script >
+<script>
+    hljs.initHighlightingOnLoad();
+
     #if(is_post)
         var postDirectory = new Headroom(document.getElementById("directory-content"), {
             tolerance: 0,
@@ -163,9 +164,9 @@
     header.init();
     $('#search-inp').keypress(function (e) {
         var key = e.which; //e.which是按键的值
-        if (key == 13) {
+        if (key === 13) {
             var q = $(this).val();
-            if (q && q != '') {
+            if (q && q !== '') {
                 window.location.href = '/search/' + q;
             }
         }

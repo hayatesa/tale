@@ -64,7 +64,11 @@ var resizefunc = [];
                 e.stopPropagation();
                 console.log('openLeftBar//////');
                 $this.openLeftBar();
-                $(".admin-title").toggle();
+                if($("#wrapper").hasClass("enlarged") && $("body").hasClass("fixed-left-void")) {
+                    $(".admin-title").hide();
+                } else {
+                    $(".admin-title").show();
+                }
             });
 
             // LEFT SIDE MAIN NAVIGATION

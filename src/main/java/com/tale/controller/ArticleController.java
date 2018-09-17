@@ -21,9 +21,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.net.URLEncoder;
 
-import static com.tale.bootstrap.TaleConst.COMMENT_APPROVED;
-import static com.tale.bootstrap.TaleConst.COMMENT_NO_AUDIT;
-import static com.tale.bootstrap.TaleConst.OPTION_ALLOW_COMMENT_AUDIT;
+import static com.tale.bootstrap.TaleConst.*;
 
 /**
  * @author biezhi

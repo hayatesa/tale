@@ -61,7 +61,7 @@ var vm = new Vue({
                         success: function (result) {
                             tale.hideLoading();
                             if (result && result.success) {
-                                var url = $('#attach_url').val() + result.payload[0].fkey;
+                                var url = result.payload[0].fkey;
                                 console.log('url =>' + url);
                                 htmlEditor.summernote('insertImage', url);
                             } else {

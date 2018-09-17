@@ -255,13 +255,13 @@ public class TaleUtils {
      * @return
      * @throws FeedException
      */
-    public static String getRssXml(java.util.List<Contents> articles) throws FeedException {
+    public static String getRssXml(List<Contents> articles) throws FeedException {
         Channel channel = new Channel("rss_2.0");
         channel.setTitle(TaleConst.OPTIONS.get("site_title", ""));
         channel.setLink(Commons.site_url());
         channel.setDescription(TaleConst.OPTIONS.get("site_description", ""));
         channel.setLanguage("zh-CN");
-        java.util.List<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         articles.forEach(post -> {
             Item item = new Item();
             item.setTitle(post.getTitle());
@@ -379,7 +379,7 @@ public class TaleUtils {
      * @param <T>
      * @return
      */
-    public static <T> String listToInSql(java.util.List<T> list) {
+    public static <T> String listToInSql(List<T> list) {
         StringBuffer sbuf = new StringBuffer();
         list.forEach(item -> sbuf.append(',').append(item.toString()));
         sbuf.append(')');

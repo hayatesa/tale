@@ -1,6 +1,5 @@
 package com.tale.controller.admin;
 
-import com.blade.Blade;
 import com.blade.Environment;
 import com.blade.ioc.annotation.Inject;
 import com.blade.kit.JsonKit;
@@ -9,6 +8,7 @@ import com.blade.mvc.Const;
 import com.blade.mvc.WebContext;
 import com.blade.mvc.annotation.*;
 import com.blade.mvc.http.Request;
+import com.blade.mvc.http.Response;
 import com.blade.mvc.ui.RestResponse;
 import com.tale.annotation.SysLog;
 import com.tale.bootstrap.TaleConst;
@@ -67,7 +67,14 @@ public class AdminApiController extends BaseController {
     @GetRoute("articles/:cid")
     public RestResponse article(@PathParam String cid) {
         Contents contents = contentsService.getContents(cid);
+        contents.setContent("");
         return RestResponse.ok(contents);
+    }
+
+    @GetRoute("articles/content/:cid")
+    public void articleContent(@PathParam String cid, Response response) {
+        Contents contents = contentsService.getContents(cid);
+        response.text(contents.getContent());
     }
 
     @PostRoute("article/new")
@@ -150,6 +157,14 @@ public class AdminApiController extends BaseController {
         contents.setType(Types.PAGE);
         contentsService.updateArticle(contents);
         return RestResponse.ok(cid);
+    }
+
+    @SysLog("删除页面")
+    @PostRoute("page/delete/:cid")
+    public RestResponse<?> deletePage(@PathParam Integer cid) {
+        contentsService.delete(cid);
+        siteService.cleanCache(Types.C_STATISTICS);
+        return RestResponse.ok();
     }
 
     @GetRoute("categories")
